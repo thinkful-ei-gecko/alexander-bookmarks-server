@@ -2,6 +2,10 @@
 
 This is a boilerplate used for starting new express projects.
 
+## Assignment Notes
+
+- When comparing to solution, they routed out the error handler and configured it to use Winston as well. They also routed out the validateBearerToken. This a good idea because you can modularize these aspects of the server instead of having to redraft them each time you use it.
+
 ## Set up
 
 Complete the following steps to start a new project (NEW-PROJECT-NAME):
