@@ -4,19 +4,32 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const bookmarksRouter = require('./bookmarks-router');
 
 const app = express();
 
-const morganOption = (NODE_ENV === 'production');
+const morganOption = NODE_ENV === 'production';
 
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Server running on port 8000! Good luck.');
+app.use(function validateBearerToken(req, res, next) {
+  const apiToken = process.env.API_TOKEN;
+  const authToken = req.get('Authorization');
+
+  if (!authToken || authToken.split(' ')[1] !== apiToken) {
+    return res
+      .status(401)
+      .json({ error: 'Unauthorized request: invalid API token' });
+  }
+  next();
 });
 
+app.use(bookmarksRouter);
+
+// eslint-disable-next-line no-unused-vars
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === 'production') {
