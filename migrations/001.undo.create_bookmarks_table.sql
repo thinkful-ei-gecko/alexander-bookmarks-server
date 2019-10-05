@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS bookmarks;
+DROP TYPE IF EXISTS bookmark_rating;
+DROP EXTENSION IF EXISTS "uuid-ossp";

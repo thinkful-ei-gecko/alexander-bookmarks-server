@@ -1,14 +1,11 @@
 const express = require('express');
-const logger = require('./logger');
-const bookmarks = require('./store');
+const logger = require('../logger');
+const bookmarks = require('../store');
 const uuid = require('uuid');
 
 const bookmarksRouter = express.Router();
 
 bookmarksRouter
-  .get('/', (req, res) => {
-    res.send('Server running on port 8000! Good luck.');
-  })
 
   .get('/bookmarks', (req, res) => {
     res.send(bookmarks);
@@ -21,7 +18,7 @@ bookmarksRouter
 
     if (!bookmark) {
       logger.error(`Bookmark with id ${bookmark} not found!`);
-      return res.status(404).send("This bookmark doesn't exist!");
+      return res.status(404).send('Bookmark does not exist!');
     }
 
     res.json(bookmark);
@@ -62,7 +59,7 @@ bookmarksRouter
 
     bookmarks.splice(bookmarksInd, 1);
 
-    logger.info(`Bookmark of ${id} deleted`);
+    logger.info(`Bookmark of id:${id} deleted`);
 
     res.status(204).end();
   });
