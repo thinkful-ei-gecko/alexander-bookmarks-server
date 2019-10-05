@@ -2,6 +2,13 @@
 
 This is a boilerplate used for starting new express projects.
 
+## TO DO
+
+### 2019-10-05 06:19:50
+
+- I am leaving the 'supertest' and actual endpoint tests for later, this will be the end of the Databases with Express stuff.
+- The Post and Delete checkpoint will be next as well, but capstone may take priority.
+
 ## Assignment Notes
 
 1. Make two new databases, bookmarks and bookmarks-test.
@@ -37,6 +44,8 @@ When your new project is ready for deployment, add a new Heroku application with
 
 ## Postmortem
 
+
+### 2019-10-05 06:19:06
 The best thing to do first is sketch out the architecture and ensure all your files/directories are put together. Consider the structures for testing, fixtures, any new directories to hold the app itself, seeding, databases, etc.
 
 `require('dotenv').config` is required anywhere you use environmental variables, including `setup.js`.
@@ -46,3 +55,5 @@ I used the sql from the prior assignment to create the migrations, and had to re
 The controller in this app is 'app.js' because it is the file that starts the server. The controller should connect to the knex instance via `app.set('db', db)` in the server.js, which injects! In turn, you can get 'db' from the server in app by using `req.app.get('db)` in any given endpoint.
 
 I have now parsed out the services tests from the endpoints tests, and fixed the forgotten case where there are no items in database.
+
+I am leaving the 'supertest' and actual endpoint tests for later.
