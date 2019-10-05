@@ -41,4 +41,8 @@ The best thing to do first is sketch out the architecture and ensure all your fi
 
 `require('dotenv').config` is required anywhere you use environmental variables, including `setup.js`.
 
-I used the sql from the prior assignment to create the migrations, and had to reconfigure them to accept UUIDs as primary keys with an extension. I made sure to define the primary key properly, and hit some problems making the keys match the table structure. I also hit a major problem exporting the bookmarks-service object properly. For some reason, I keep wrapping exports in object unnecessarily - a holdover from React?...
+I used the sql from the prior assignment to create the migrations, and had to reconfigure them to accept UUIDs as primary keys with an extension. I made sure to define the primary key properly, and hit some problems making the keys match the table structure. Ideally, I should have added migrations instead of reconfiguring the first to better show my process - I wasn't using it as intended, but it's hard to say what would have been faster. I also hit a major problem exporting the bookmarks-service object properly. For some reason, I keep wrapping exports in object unnecessarily - a holdover from React?...
+
+The controller in this app is 'app.js' because it is the file that starts the server. The controller should connect to the knex instance via `app.set('db', db)` in the server.js, which injects! In turn, you can get 'db' from the server in app by using `req.app.get('db)` in any given endpoint.
+
+I have now parsed out the services tests from the endpoints tests, and fixed the forgotten case where there are no items in database.
